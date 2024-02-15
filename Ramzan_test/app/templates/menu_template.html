@@ -7,8 +7,7 @@
     <title>Menu</title>
 </head>
 <body>
-    {% draw_menu menu_name %}
-    <ul><li class=""><a href="rama">ramzan</a><ul><li class=""><a href="rama_1">ramzan_1</a></li></ul></li></ul> 
+    <h1>{% autoescape off %}{% draw_menu menu_url %}{% endautoescape %}</h1>
 </body>
 </html>
 
