@@ -15,12 +15,12 @@ def draw_menu(menu_url: str = None):
         )
         menu_html = "<ul>"
         for item in menu_items:  # Пишем всех родителей
-            menu_html += f'<li><a href="http://localhost:8000/menu/{ item.title }">{item.title}</a>'
+            menu_html += f'<li><a href="http://localhost:8000/menu/{ item.url }">{item.title}</a>'
             for child in item.children.all():  # Пишем всех детей
                 menu_html += f"""
                     <ul>
                         <li>
-                            <a href="http://localhost:8000/menu/{ child.title }">{child.title}</a>
+                            <a href="http://localhost:8000/menu/{ child.url }">{child.title}</a>
                         </li>
                     </ul>
                 """
@@ -31,14 +31,14 @@ def draw_menu(menu_url: str = None):
 
     else:
         menu_items = MenuItem.objects.prefetch_related("children", "parent").get(
-            title=menu_url
+            url=menu_url
         )
 
         for item in menu_items.children.all():  # Пишем всех детей
             menu_html += f"""
                 <ul>
                     <li>
-                        <a href="http://localhost:8000/menu/{ item.title }">{item.title}</a>
+                        <a href="http://localhost:8000/menu/{ item.url }">{item.title}</a>
                     </li>
                 </ul>
             """
@@ -48,12 +48,11 @@ def draw_menu(menu_url: str = None):
             menu_html = f"""
                 <ul>    
                     <li>
-                        <a href="http://localhost:8000/menu/{ item.title }">{item.title}</a>    
+                        <a href="http://localhost:8000/menu/{ item.url }">{item.title}</a>    
                     </li>
                     {menu_html}
                 </ul>
             """
-
             if item.parent:
                 get_parents(item.parent)
 

@@ -6,7 +6,7 @@ class MenuItem(models.Model):
     parent = models.ForeignKey(
         "self", related_name="children", null=True, blank=True, on_delete=models.CASCADE
     )
-    url = models.CharField(max_length=100, blank=True, null=True)
+    url = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.title
